@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import type { RootStackParamList } from '../../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -6,18 +6,26 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 interface LoginProps extends NativeStackScreenProps<RootStackParamList,'Login'>{
 }
 
-const LoginScreen = ({navigation}:LoginProps) => {
+type LoginInput={
+  username:string;
+  password:string;
+}
 
+const LoginScreen = ({navigation}:LoginProps) => {
+  const [input, setInput] = useState<LoginInput>({username:'',password:''});
   const login = () => {
     // TODO
+    console.log(input)
     console.log("TODO: login")
    }
 
   return (
     <View style={styles.screen}>
       <Text style={styles.heading}>Login to Message Man</Text>
-      <TextInput style={styles.input} placeholder='Username'/>
-      <TextInput style={styles.input} placeholder='Password'secureTextEntry/>
+      <TextInput style={styles.input} placeholder='Username' value={input.username}
+       onChangeText={(value) => { setInput((prev) => ({...prev,username:value})) }}/>
+      <TextInput style={styles.input} placeholder='Password'secureTextEntry value={input.password}
+      onChangeText={(text) => { setInput((prev) => ({...prev,password:text})) }}/>
       <Button title='    LOGIN    ' onPress={login}/>
       <Text style={styles.text}>
         Don't have an account?
