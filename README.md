@@ -5,7 +5,7 @@ A messaging app built with React Native and Firebase Realtime database
 ## Develop locally
 
 1. clone the project
-2. `yarn install --dev`
+2. `yarn install`
 3. `yarn start`
 4. Install "Expo Go" app, then scan the QR code with your phone ([Docuementation](https://reactnative.dev/docs/environment-setup))
 
