@@ -17,14 +17,16 @@ type SignUpInput = {
 
 const SignUpScreen = ({ navigation }: SignUpProps) => {
   const [input, setInput] = useState<SignUpInput>({ email: '', password: '' });
+  const [errMessage, setErrMessage] = useState<string>('');
 
-  const signUp = () => {
+  const signUp = async () => {
     try {
-      createUserWithEmailAndPassword(auth, input.email, input.password)
+      await createUserWithEmailAndPassword(auth, input.email, input.password)
       navigation.navigate('Login');
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         console.error(error.code, error.message);
+        setErrMessage(error.message);
       }
     }
   }
@@ -37,6 +39,7 @@ const SignUpScreen = ({ navigation }: SignUpProps) => {
       <TextInput style={styles.input} placeholder='Password' secureTextEntry value={input.password}
         onChangeText={(text) => { setInput((prev) => ({ ...prev, password: text })) }} />
       <Button title='    SIGN UP    ' onPress={signUp} />
+      <Text style={styles.errMessage}>{errMessage}</Text>
       <Text style={styles.text}>
         Already have an account?
         <Text style={styles.link} onPress={() => { navigation.navigate('Login') }}>{` Log In`}</Text>
@@ -70,6 +73,10 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 300,
     fontSize: 16
+  },
+  errMessage: {
+    color: 'red',
+    margin: 10
   }
 })
 
