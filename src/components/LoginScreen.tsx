@@ -20,8 +20,8 @@ const LoginScreen = ({ navigation }: LoginProps) => {
     try {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, input.email, input.password)
-      const user = userCredential.user;
-      console.log(user);// TODO: store user data && navigate to correct page
+      const user = userCredential.user; // TODO: restore user
+      navigation.navigate('Overview');
     } catch (error) {
       setErrMessage('Wrong email/password')
       console.error(error);
