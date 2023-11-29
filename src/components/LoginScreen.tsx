@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import type { RootStackParamList } from '../../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import useUserStore from '../stores/userStore'
 
 interface LoginProps extends NativeStackScreenProps<RootStackParamList, 'Login'> {
 }
@@ -15,12 +16,13 @@ type LoginInput = {
 const LoginScreen = ({ navigation }: LoginProps) => {
   const [input, setInput] = useState<LoginInput>({ email: '', password: '' });
   const [errMessage, setErrMessage] = useState<string>('');
+  const { setUser } = useUserStore()
 
   const login = async () => {
     try {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, input.email, input.password)
-      const user = userCredential.user; // TODO: restore user
+      setUser(userCredential.user);
       navigation.navigate('Overview');
     } catch (error) {
       setErrMessage('Wrong email/password')
