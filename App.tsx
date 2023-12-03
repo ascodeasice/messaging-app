@@ -5,7 +5,8 @@ import SignUpScreen from './src/components/SignUpScreen';
 import OverviewScreen from './src/components/OverviewScreen';
 import { User, getAuth } from 'firebase/auth';
 import useUserStore from './src/stores/userStore';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { PaperProvider } from 'react-native-paper';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -33,22 +34,25 @@ export default function App() {
   }, []);
 
   return (
+
     <NavigationContainer>
-      <Stack.Navigator>
-        {user ?
-          (
-            <>
-              <Stack.Screen name="Overview" component={OverviewScreen} />
-            </>
-          ) :
-          (
-            <>
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-            </>
-          )
-        }
-      </Stack.Navigator>
+      <PaperProvider>
+        <Stack.Navigator>
+          {user ?
+            (
+              <>
+                <Stack.Screen name="Overview" component={OverviewScreen} />
+              </>
+            ) :
+            (
+              <>
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="SignUp" component={SignUpScreen} />
+              </>
+            )
+          }
+        </Stack.Navigator>
+      </PaperProvider>
     </NavigationContainer>
   );
 }
