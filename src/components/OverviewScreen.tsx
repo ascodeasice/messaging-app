@@ -1,4 +1,5 @@
-import { View, Text, Button } from 'react-native'
+import { View, Button, StyleSheet } from 'react-native'
+import { Avatar, Text } from 'react-native-paper'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../App'
@@ -23,10 +24,24 @@ const OverviewScreen = ({ navigation }: OverviewProps) => {
 
   return (
     <View>
-      <Text>{JSON.stringify(user)}</Text>
+      <View style={styles.profile}>
+        <Avatar.Text size={36} label={user?.email?.substring(0,2)??'AN'}/>
+        <Text variant='bodyLarge'>{user?.email}</Text>
+      </View>
       <Button title='    LOGOUT   ' onPress={onPressSignOut} />
     </View>
   )
 }
+
+const styles=StyleSheet.create({
+  profile:{
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+    gap:10,
+    paddingVertical:10
+  }
+})
+
 
 export default OverviewScreen
