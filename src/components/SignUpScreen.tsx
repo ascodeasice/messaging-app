@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button } from'react-native-paper'
 import { RootStackParamList } from '../../App'
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { FirebaseError } from 'firebase/app'
@@ -38,7 +39,7 @@ const SignUpScreen = ({ navigation }: SignUpProps) => {
         onChangeText={(value) => { setInput((prev) => ({ ...prev, email: value })) }} />
       <TextInput style={styles.input} placeholder='Password' secureTextEntry value={input.password}
         onChangeText={(text) => { setInput((prev) => ({ ...prev, password: text })) }} />
-      <Button title='    SIGN UP    ' onPress={signUp} />
+      <Button mode='contained' onPress={signUp}>SIGN UP</Button>
       <Text style={styles.errMessage}>{errMessage}</Text>
       <Text style={styles.text}>
         Already have an account?

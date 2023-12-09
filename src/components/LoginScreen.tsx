@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button } from 'react-native-paper'
 import type { RootStackParamList } from '../../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
@@ -37,7 +38,7 @@ const LoginScreen = ({ navigation }: LoginProps) => {
         onChangeText={(value) => { setInput((prev) => ({ ...prev, email: value })) }} />
       <TextInput style={styles.input} placeholder='Password' secureTextEntry value={input.password}
         onChangeText={(text) => { setInput((prev) => ({ ...prev, password: text })) }} />
-      <Button title='    LOGIN    ' onPress={login} />
+      <Button mode='contained' onPress={login}>LOGIN</Button>
       <Text style={styles.errMessage}>{errMessage}</Text>
       <Text style={styles.text}>
         Don't have an account?

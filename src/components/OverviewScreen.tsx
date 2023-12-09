@@ -1,5 +1,5 @@
-import { View, Button, StyleSheet } from 'react-native'
-import { Avatar, Text } from 'react-native-paper'
+import { View,  StyleSheet } from 'react-native'
+import { Avatar, Text, Button } from 'react-native-paper'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../App'
@@ -28,7 +28,7 @@ const OverviewScreen = ({ navigation }: OverviewProps) => {
         <Avatar.Text size={36} label={user?.email?.substring(0,2)??'AN'}/>
         <Text variant='bodyLarge'>{user?.email}</Text>
       </View>
-      <Button title='    LOGOUT   ' onPress={onPressSignOut} />
+      <Button onPress={onPressSignOut} mode='contained'>LOG OUT</Button>
     </View>
   )
 }
